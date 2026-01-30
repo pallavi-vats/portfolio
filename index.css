@@ -11,7 +11,7 @@
 body {
   background: #0f0f0f;
   color: #ffffff;
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
@@ -22,19 +22,15 @@ body {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(76,175,80,0.15), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(0,150,136,0.15), transparent 40%);
-  animation: bgMove 12s ease-in-out infinite alternate;
+    radial-gradient(circle at 20% 20%, rgba(76,175,80,0.14), transparent 42%),
+    radial-gradient(circle at 80% 80%, rgba(0,150,136,0.14), transparent 42%);
+  animation: bgMove 14s ease-in-out infinite alternate;
   z-index: -1;
 }
 
 @keyframes bgMove {
-  from {
-    background-position: 0% 0%, 100% 100%;
-  }
-  to {
-    background-position: 100% 50%, 0% 50%;
-  }
+  from { background-position: 0% 0%, 100% 100%; }
+  to { background-position: 100% 50%, 0% 50%; }
 }
 
 /* =====================
@@ -44,9 +40,10 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.82);
+  backdrop-filter: blur(12px);
   z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
 .nav {
@@ -59,14 +56,15 @@ body {
 }
 
 .logo {
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: bold;
+  letter-spacing: 0.4px;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 24px;
+  gap: 26px;
 }
 
 .nav-links a {
@@ -74,6 +72,11 @@ body {
   color: #ffffff;
   font-size: 0.95rem;
   position: relative;
+  opacity: 0.85;
+}
+
+.nav-links a:hover {
+  opacity: 1;
 }
 
 .nav-links a.active::after {
@@ -107,61 +110,63 @@ body {
   max-width: 1100px;
   margin: auto;
   min-height: 100vh;
-  padding: 140px 20px 80px;
+  padding: 150px 20px 90px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: 50px;
 }
 
 .home-text {
-  max-width: 600px;
+  max-width: 620px;
 }
 
 .home-text h1 {
-  font-size: 2.4rem;
-  margin-bottom: 10px;
+  font-size: 2.6rem;
+  margin-bottom: 12px;
+  line-height: 1.2;
 }
 
 .home-text h3 {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   color: #4caf50;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .home-text p {
-  color: #cccccc;
+  color: #cfcfcf;
+  font-size: 0.98rem;
 }
 
 .home-image img {
-  width: 260px;
-  height: 260px;
+  width: 270px;
+  height: 270px;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
   animation: float 4s ease-in-out infinite;
 }
 
 @keyframes float {
-  50% {
-    transform: translateY(-10px);
-  }
+  50% { transform: translateY(-10px); }
 }
 
 /* BUTTON */
 .btn {
   display: inline-block;
-  margin-top: 24px;
-  padding: 10px 22px;
-  background: #4caf50;
+  margin-top: 28px;
+  padding: 11px 26px;
+  background: linear-gradient(135deg, #4caf50, #43a047);
   color: white;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 500;
-  transition: background 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .btn:hover {
-  background: #43a047;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(76,175,80,0.35);
 }
 
 /* =====================
@@ -170,26 +175,24 @@ body {
 .section {
   max-width: 1100px;
   margin: auto;
-  padding: 90px 20px;
+  padding: 95px 20px;
 }
 
 .section h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
+  font-size: 2.05rem;
+  margin-bottom: 40px;
+  position: relative;
 }
 
-/* =====================
-   ABOUT + VIDEO
-===================== */
-.video-title {
-  margin-top: 40px;
-  margin-bottom: 16px;
-  font-size: 1.2rem;
-  opacity: 0.9;
-}
-
-.video-wrapper {
-  max-width: 720px;
+.section h2::after {
+  content: "";
+  width: 50px;
+  height: 3px;
+  background: #4caf50;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  border-radius: 2px;
 }
 
 /* =====================
@@ -198,31 +201,33 @@ body {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  gap: 26px;
 }
 
 .project-card {
-  background: #1a1a1a;
-  padding: 22px;
-  border-radius: 10px;
+  background: linear-gradient(180deg, #1a1a1a, #151515);
+  padding: 24px;
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  transition: transform 0.3s ease;
+  gap: 14px;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.55);
 }
 
 .project-intro {
   font-size: 0.95rem;
-  color: #b5b5b5;
+  color: #bcbcbc;
 }
 
 .project-impact {
   font-size: 0.9rem;
-  color: #cfcfcf;
+  color: #d5d5d5;
   opacity: 0.85;
 }
 
@@ -245,24 +250,87 @@ body {
 }
 
 /* =====================
-   SKILLS & CERTS
+   SKILLS  (ONLY FIXED PART)
 ===================== */
 .skills-group {
-  margin-bottom: 26px;
+  margin-bottom: 34px;
 }
 
 .skills-group h3 {
-  font-size: 1.1rem;
-  margin-bottom: 6px;
+  font-size: 1.15rem;
+  margin-bottom: 14px;
 }
 
-.skills-group p {
-  color: #b5b5b5;
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 26px;
 }
 
-.skill-sub {
-  font-size: 0.85rem;
-  opacity: 0.75;
+.skill-item {
+  position: relative; /* ✅ ADDED */
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 14px 10px;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-item:hover {
+  background: rgba(76,175,80,0.14);
+  box-shadow: 0 0 0 1px rgba(76,175,80,0.25);
+}
+
+.skill-item img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.skill-item:hover img {
+  transform: scale(1.15);
+}
+
+.skill-name {
+  position: absolute;
+  bottom: -30px;
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+
+
+/* ✅ NEW: image hover only */
+.skill-item img:hover + .skill-name {
+  opacity: 1;
+}
+
+/* =====================
+   EXPERIENCE & CERTS
+===================== */
+.experience-item {
+  margin-bottom: 44px;
+}
+
+.exp-duration {
+  display: block;
+  color: #9e9e9e;
+  margin-bottom: 10px;
+}
+
+.experience-item li,
+.cert-list li {
+  margin-bottom: 10px;
+  color: #cccccc;
 }
 
 .cert-list a {
@@ -272,79 +340,6 @@ body {
 
 .cert-list a:hover {
   color: #4caf50;
-  text-decoration: underline;
-}
-
-/* =====================
-   SKILL LOGOS GRID (ADDED)
-===================== */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 26px;
-  margin-top: 30px;
-}
-
-.skill-item {
-  position: relative;
-  text-align: center;
-  cursor: pointer;
-}
-
-.skill-item img {
-  width: 46px;
-  height: 46px;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.skill-item:hover img {
-  transform: scale(1.15);
-  filter: brightness(1.2);
-}
-
-.skill-name {
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #111;
-  color: #ffffff;
-  font-size: 12px;
-  padding: 4px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-}
-
-.skill-item:hover .skill-name,
-.skill-item:focus-within .skill-name {
-  opacity: 1;
-}
-
-/* =====================
-   EXPERIENCE
-===================== */
-.experience-item {
-  margin-bottom: 40px;
-}
-
-.exp-duration {
-  display: block;
-  color: #9e9e9e;
-  margin-bottom: 10px;
-}
-
-.experience-item ul,
-.cert-list {
-  padding-left: 20px;
-}
-
-.experience-item li,
-.cert-list li {
-  margin-bottom: 8px;
-  color: #cccccc;
 }
 
 /* =====================
@@ -365,7 +360,7 @@ body {
 .animate {
   opacity: 0;
   transform: translateY(40px);
-  transition: 0.8s ease;
+  transition: 0.9s ease;
 }
 
 .animate.show {
@@ -389,8 +384,8 @@ body {
     right: 20px;
     background: #111;
     flex-direction: column;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 22px;
+    border-radius: 12px;
   }
 
   .nav-links.show {
@@ -408,67 +403,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .skill-name {
-    font-size: 11px;
-    bottom: -26px;
+  .home-text h1 {
+    font-size: 2.1rem;
   }
 }
-
-.open-role {
-  display: inline-block;
-  margin-bottom: 14px;
-  padding: 8px 14px;
-  background: rgba(76, 175, 80, 0.12);
-  border-left: 4px solid #c3e2c4;
-  color: #e0ffe2;
-  font-weight: 500;
-  border-radius: 4px;
-}
-/* =====================
-   SKILL ICON BACKGROUND ENHANCEMENT
-===================== */
-.skill-item {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 16px 10px;
-  border-radius: 10px;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill-item:hover {
-  background: rgba(76, 175, 80, 0.12);
-  box-shadow: 0 0 0 1px rgba(76, 175, 80, 0.25);
-}
-
-
-/* =====================
-   SKILL CARD SIZE DECREASE & UNIFORMITY
-===================== */
-.skill-item {
-  min-height: 72px;
-  max-height: 72px;
-  padding: 10px 8px;
-}
-
-.skill-item img {
-  width: 36px;
-  height: 36px;
-  padding: 4px;
-  object-fit: contain;
-}
-
-/* =====================
-   FINAL SKILL CARD ALIGNMENT FIX
-===================== */
-.skill-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.skill-item img {
-  display: block;
-}
-.dsa-icon img {
-  transform: scale(0.9);
-}
-

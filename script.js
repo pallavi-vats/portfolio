@@ -1,92 +1,101 @@
 /* =========================
-   NAV ACTIVE LINK (Optimized)
+   NAV ACTIVE LINK (POLISHED)
 ========================= */
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-links a");
 
-const navObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(link => {
-          link.classList.toggle(
-            "active",
-            link.getAttribute("href") === `#${entry.target.id}`
-          );
-        });
-      }
-    });
-  },
-  { threshold: 0.6 }
-);
+if (sections.length && navLinks.length) {
+  const navObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${entry.target.id}`
+            );
+          });
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
 
-sections.forEach(section => navObserver.observe(section));
+  sections.forEach(section => navObserver.observe(section));
+}
 
 /* =========================
-   SCROLL ANIMATION
+   SCROLL ANIMATION (SAFE)
 ========================= */
 const animatedElements = document.querySelectorAll(".animate");
 
-const animationObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-        animationObserver.unobserve(entry.target); // animate once
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
+if (animatedElements.length) {
+  const animationObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          animationObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
 
-animatedElements.forEach(el => animationObserver.observe(el));
+  animatedElements.forEach(el => animationObserver.observe(el));
+}
 
 /* =========================
-   MOBILE MENU
+   MOBILE MENU (SMOOTH UX)
 ========================= */
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.querySelector(".nav-links");
 
-menuToggle.addEventListener("click", () => {
-  navMenu.classList.toggle("show");
-});
-
-/* Close menu after clicking a link (mobile UX) */
-navLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    navMenu.classList.remove("show");
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
   });
-});
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("show");
+    });
+  });
+}
 
 /* =========================
-   PROJECT VIDEO MODAL
+   PROJECT VIDEO MODAL (SAFE GUARD)
 ========================= */
 const modal = document.getElementById("modal");
 const modalVideo = document.getElementById("modalVideo");
 const playButtons = document.querySelectorAll(".play-btn");
 
-playButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    const videoSrc = button.closest(".project-card").dataset.video;
-    modalVideo.src = videoSrc;
-    modal.style.display = "flex";
-    modalVideo.play();
+if (modal && modalVideo && playButtons.length) {
+  playButtons.forEach(button => {
+    button.addEventListener("click", e => {
+      const card = button.closest(".project-card");
+      const videoSrc = card?.dataset?.video;
+
+      if (!videoSrc) return;
+
+      modalVideo.src = videoSrc;
+      modal.style.display = "flex";
+      modalVideo.play();
+    });
   });
-});
 
-/* Close modal on outside click */
-modal.addEventListener("click", e => {
-  if (e.target === modal) closeModal();
-});
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeModal();
+  });
 
-/* Close modal on ESC key */
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeModal();
-});
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeModal();
+  });
 
-function closeModal() {
-  modal.style.display = "none";
-  modalVideo.pause();
-  modalVideo.currentTime = 0;
-  modalVideo.src = "";
+  function closeModal() {
+    modal.style.display = "none";
+    modalVideo.pause();
+    modalVideo.currentTime = 0;
+    modalVideo.src = "";
+  }
 }
